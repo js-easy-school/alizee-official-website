@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alizée - Site Officiel</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --color-bg: #0a0a12;
+        --color-bg-card: #12121f;
+        --color-primary: #c9a0dc;
+        --color-secondary: #e8b4c8;
+        --color-accent: #ff6b9d;
+        --color-text: #f0eff4;
+        --color-text-muted: #9d9dae;
+        --color-gold: #d4af37;
+        --font-display: "Cormorant Garamond", serif;
+        --font-body: "Outfit", sans-serif;
+        --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--color-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-primary);
+        border-radius: 4px;
+      }
+
+      /* Background Pattern */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            ellipse at 20% 0%,
+            rgba(201, 160, 220, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(232, 180, 200, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            rgba(255, 107, 157, 0.03) 0%,
+            transparent 70%
+          );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 10, 18, 0.95),
+          transparent
+        );
+        transition: var(--transition);
+      }
+
+      .nav.scrolled {
+        background: rgba(10, 10, 18, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 1rem 4rem;
+      }
+
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 300;
+        letter-spacing: 0.3em;
+        color: var(--color-text);
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--color-primary);
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--color-text);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        text-align: center;
+        padding: 8rem 2rem 6rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -2;
+      }
+
+      .hero-bg img {
+        width: 100%;
+        height: 120%;
+        object-fit: cover;
+        object-position: center 30%;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 10, 18, 0.7) 0%,
+          rgba(10, 10, 18, 0.2) 30%,
+          rgba(10, 10, 18, 0.5) 70%,
+          rgba(10, 10, 18, 1) 100%
+        );
+        z-index: -1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(5rem, 18vw, 16rem);
+        font-weight: 300;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        color: var(--color-text);
+        text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+        animation: fadeInUp 1s ease-out 0.2s backwards;
+      }
+
+      .hero-subtitle {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 300;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.85);
+        letter-spacing: 0.4em;
+        margin-bottom: 3.5rem;
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
+        animation: fadeInUp 1s ease-out 0.4s backwards;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1.5rem;
+        animation: fadeInUp 1s ease-out 0.6s backwards;
+      }
+
+      .btn {
+        padding: 1.2rem 3rem;
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 0;
+        transition: var(--transition);
+        cursor: pointer;
+        border: none;
+      }
+
+      .btn-primary {
+        background: var(--color-primary);
+        color: var(--color-bg);
+      }
+
+      .btn-primary:hover {
+        background: var(--color-secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(201, 160, 220, 0.3);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--color-text);
+        border: 1px solid var(--color-text-muted);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+      }
+
+      .scroll-indicator span {
+        display: block;
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(
+          to bottom,
+          var(--color-primary),
+          transparent
+        );
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section Styling */
+      .section {
+        padding: 8rem 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+      }
+
+      .section-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 300;
+        letter-spacing: 0.1em;
+      }
+
+      .section-divider {
+        width: 60px;
+        height: 1px;
+        background: var(--color-primary);
+        margin: 2rem auto;
+      }
+
+      /* Tours Section */
+      .tours-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+      }
+
+      .tour-card {
+        background: var(--color-bg-card);
+        border: 1px solid rgba(201, 160, 220, 0.1);
+        overflow: hidden;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .tour-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--color-primary),
+          var(--color-accent)
+        );
+        transform: scaleX(0);
+        transition: var(--transition);
+      }
+
+      .tour-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .tour-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border-color: rgba(201, 160, 220, 0.2);
+      }
+
+      .tour-header {
+        padding: 2.5rem;
+        border-bottom: 1px solid rgba(201, 160, 220, 0.1);
+      }
+
+      .tour-name {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        color: var(--color-text);
+      }
+
+      .tour-year {
+        font-size: 0.85rem;
+        color: var(--color-primary);
+        letter-spacing: 0.2em;
+      }
+
+      .tour-dates {
+        padding: 2rem 2.5rem;
+      }
+
+      .tour-date {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: var(--transition);
+      }
+
+      .tour-date:last-child {
+        border-bottom: none;
+      }
+
+      .tour-date:hover {
+        padding-left: 0.5rem;
+      }
+
+      .tour-date-info {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+      }
+
+      .tour-date-venue {
+        font-weight: 500;
+        color: var(--color-text);
+      }
+
+      .tour-cta {
+        padding: 1.5rem 2.5rem;
+        background: rgba(201, 160, 220, 0.05);
+      }
+
+      .tour-cta a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--color-primary);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: var(--transition);
+      }
+
+      .tour-cta a:hover {
+        color: var(--color-text);
+      }
+
+      /* Discography Section */
+      .discography-section {
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(18, 18, 31, 0.5),
+          transparent
+        );
+      }
+
+      /* Album Tabs */
+      .album-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 3rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .album-tab {
+        padding: 1rem 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--color-text-muted);
+        font-family: var(--font-display);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        white-space: nowrap;
+      }
+
+      .album-tab:hover {
+        background: rgba(201, 160, 220, 0.1);
+        border-color: var(--color-primary);
+        color: var(--color-text);
+      }
+
+      .album-tab.active {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        color: var(--color-bg);
+      }
+
+      .album-tab-year {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-left: 0.5rem;
+      }
+
+      .albums-container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .album {
+        display: none;
+        grid-template-columns: 300px 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .album.active {
+        display: grid;
+        animation: fadeIn 0.4s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .album-cover-container {
+        position: relative;
+      }
+
+      .album-cover {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        transition: var(--transition);
+      }
+
+      .album-cover:hover {
+        transform: scale(1.02) rotate(-1deg);
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+      }
+
+      .album-year {
+        position: absolute;
+        bottom: -1rem;
+        left: 1rem;
+        background: var(--color-primary);
+        color: var(--color-bg);
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+      }
+
+      .album-info {
+        padding-top: 0;
+      }
+
+      .album-title {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      .album-credits {
+        font-size: 1rem;
+        color: var(--color-text-muted);
+        margin-bottom: 2rem;
+        font-style: italic;
+      }
+
+      .tracklist {
+        list-style: none;
+        counter-reset: track;
+      }
+
+      .track {
+        counter-increment: track;
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: var(--transition);
+        font-size: 1.1rem;
+      }
+
+      .track:hover {
+        background: rgba(201, 160, 220, 0.05);
+        padding-left: 1rem;
+        margin-left: -1rem;
+        padding-right: 1rem;
+      }
+
+      .track::before {
+        content: counter(track, decimal-leading-zero);
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        color: var(--color-primary);
+        margin-right: 1.2rem;
+        min-width: 2rem;
+      }
+
+      .track-name {
+        flex: 1;
+        font-weight: 400;
+      }
+
+      .track-name.featured {
+        color: var(--color-primary);
+        font-weight: 500;
+      }
+
+      .track-links {
+        display: flex;
+        gap: 0.8rem;
+      }
+
+      .track-link {
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        text-decoration: none;
+        padding: 0.4rem 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+        white-space: nowrap;
+      }
+
+      .track-link:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      /* Vinyl Collection */
+      .vinyl-section {
+        padding: 6rem 4rem;
+        background: var(--color-bg-card);
+      }
+
+      .vinyl-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .vinyl-item {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1;
+        cursor: pointer;
+      }
+
+      .vinyl-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .vinyl-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .vinyl-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(10, 10, 18, 0.9),
+          transparent 50%
+        );
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+        opacity: 0;
+        transition: var(--transition);
+      }
+
+      .vinyl-item:hover .vinyl-overlay {
+        opacity: 1;
+      }
+
+      .vinyl-title {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        color: var(--color-text);
+      }
+
+      /* Biography Section */
+      .bio-section {
+        position: relative;
+      }
+
+      .bio-content {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 6rem;
+        align-items: center;
+      }
+
+      .bio-image-container {
+        position: relative;
+      }
+
+      .bio-image-container::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 100%;
+        height: 100%;
+        border: 1px solid var(--color-primary);
+        z-index: -1;
+      }
+
+      .bio-image {
+        width: 100%;
+        filter: grayscale(30%);
+        transition: var(--transition);
+      }
+
+      .bio-image:hover {
+        filter: grayscale(0%);
+      }
+
+      .bio-text {
+        font-size: 1.1rem;
+        line-height: 2;
+        color: var(--color-text-muted);
+      }
+
+      .bio-text p {
+        margin-bottom: 1.5rem;
+      }
+
+      .bio-text p:first-of-type::first-letter {
+        font-family: var(--font-display);
+        font-size: 4rem;
+        float: left;
+        line-height: 1;
+        margin-right: 1rem;
+        color: var(--color-primary);
+      }
+
+      .bio-highlight {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        font-style: italic;
+        color: var(--color-text);
+        border-left: 2px solid var(--color-primary);
+        padding-left: 2rem;
+        margin: 3rem 0;
+      }
+
+      /* Collaborations & Covers */
+      .collab-section {
+        background: linear-gradient(
+          135deg,
+          var(--color-bg-card) 0%,
+          var(--color-bg) 100%
+        );
+      }
+
+      .collab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .collab-item {
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: var(--transition);
+        text-decoration: none;
+        color: var(--color-text);
+        display: block;
+      }
+
+      .collab-item:hover {
+        background: rgba(201, 160, 220, 0.05);
+        border-color: rgba(201, 160, 220, 0.2);
+        transform: translateX(5px);
+      }
+
+      .collab-artist {
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        margin-bottom: 0.3rem;
+      }
+
+      .collab-song {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 4rem;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        letter-spacing: 0.3em;
+        margin-bottom: 2rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .social-links a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--color-primary);
+      }
+
+      .footer-section-title {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin: 1.5rem 0 0.8rem;
+      }
+
+      .footer-section-title:first-of-type {
+        margin-top: 0;
+      }
+
+      .footer-text {
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+      }
+
+      .footer-text a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-text a:hover {
+        color: var(--color-primary);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1001;
+      }
+
+      .mobile-menu-btn span {
+        width: 25px;
+        height: 2px;
+        background: var(--color-text);
+        transition: var(--transition);
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .album {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .album-cover-container {
+          max-width: 300px;
+          margin: 0 auto;
+        }
+
+        .album-tabs {
+          gap: 0.3rem;
+        }
+
+        .album-tab {
+          padding: 0.6rem 0.8rem;
+          font-size: 0.85rem;
+        }
+
+        .album-tab-year {
+          display: none;
+        }
+
+        .bio-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .bio-image-container {
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav {
+          padding: 1rem 2rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: flex;
+        }
+
+        .section {
+          padding: 4rem 2rem;
+        }
+
+        .album-tabs {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .album-tab {
+          text-align: center;
+          padding: 0.8rem 1rem;
+        }
+
+        .album-title {
+          font-size: 2rem;
+        }
+
+        .tours-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-bottom: 4rem;
+        }
+
+        .hero-bg img {
+          object-position: center 25%;
+        }
+
+        .hero-title {
+          letter-spacing: 0.15em;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+          letter-spacing: 0.2em;
+        }
+
+        .track-links {
+          display: none;
+        }
+
+        .vinyl-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Animations on scroll */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Custom selection */
+      ::selection {
+        background: var(--color-primary);
+        color: var(--color-bg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+      <a href="#" class="nav-logo">Alizée</a>
+      <ul class="nav-links">
+        <li><a href="#tours">Tournées</a></li>
+        <li><a href="#discography">Discographie</a></li>
+        <li><a href="#biography">Biographie</a></li>
+        <li><a href="#collaborations">Collaborations</a></li>
+      </ul>
+      <div class="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-bg">
+        <img
+          src="https://alizee-officiel.com/assets/images/tour-2026.jpg"
+          alt="Alizée"
+        />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Alizée</h1>
+        <p class="hero-subtitle">Chanteuse • Danseuse • Artiste Française</p>
+        <div class="hero-cta">
+          <a href="#tours" class="btn btn-primary">Tournées 2026</a>
+          <a href="#discography" class="btn btn-outline">Discographie</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- Tours Section -->
+    <section class="section" id="tours">
+      <div class="section-header fade-in">
+        <p class="section-label">Concerts & Événements</p>
+        <h2 class="section-title">Tournées 2026</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="tours-grid">
+        <div class="tour-card fade-in">
+          <div class="tour-header">
+            <h3 class="tour-name">I Gotta Feeling - La Tournée</h3>
+            <span class="tour-year">Janvier - Mars 2026</span>
+          </div>
+          <div class="tour-dates">
+            <div class="tour-date">
+              <span class="tour-date-info">29 Jan</span>
+              <span class="tour-date-venue">Nice - Palais Nikaïa</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">30 Jan</span>
+              <span class="tour-date-venue">Martigues - La Halle</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">31 Jan</span>
+              <span class="tour-date-venue">Montpellier - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">05 Fév</span>
+              <span class="tour-date-venue">Nantes - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">06 Fév</span>
+              <span class="tour-date-venue">Orléans - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">07 Fév</span>
+              <span class="tour-date-venue">Rennes - Le Liberté</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">11 Fév</span>
+              <span class="tour-date-venue">Genève - Arena</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">12 Fév</span>
+              <span class="tour-date-venue">Lyon - Halle Tony Garnier</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">13 Fév</span>
+              <span class="tour-date-venue">Amneville - Le Galaxie</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">14 Fév</span>
+              <span class="tour-date-venue">Dijon - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">20 Fév</span>
+              <span class="tour-date-venue">Montbéliard - L'Axone</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">21 Fév</span>
+              <span class="tour-date-venue">Reims - Reims Arena</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">25 Fév</span>
+              <span class="tour-date-venue">Lille - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">26 Fév</span>
+              <span class="tour-date-venue">Amiens - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">27 Fév</span>
+              <span class="tour-date-venue">Rouen - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">28 Fév</span>
+              <span class="tour-date-venue">Caen - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">04 Mar</span>
+              <span class="tour-date-venue">Bordeaux - Arkéa Arena</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">05 Mar</span>
+              <span class="tour-date-venue">Poitiers - Arena Futuroscope</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">06 Mar</span>
+              <span class="tour-date-venue">Brest - Brest Arena</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">12 Mar</span>
+              <span class="tour-date-venue">Strasbourg - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">13-14 Mar</span>
+              <span class="tour-date-venue">Paris - Dôme de Paris</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">18 Mar</span>
+              <span class="tour-date-venue">Toulouse - Zénith</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">19 Mar</span>
+              <span class="tour-date-venue">Pau - Zénith</span>
+            </div>
+          </div>
+          <div class="tour-cta">
+            <a
+              href="https://www.instagram.com/igottafeelinglatournee/"
+              target="_blank"
+            >
+              Plus d'informations →
+            </a>
+          </div>
+        </div>
+
+        <div class="tour-card fade-in">
+          <div class="tour-header">
+            <h3 class="tour-name">Alizée 25 ans déjà !</h3>
+            <span class="tour-year">Mai - Octobre 2026</span>
+          </div>
+          <div class="tour-dates">
+            <div class="tour-date">
+              <span class="tour-date-info">29 Mai</span>
+              <span class="tour-date-venue">Mexico CDMX - La Maraka</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">05 Sep</span>
+              <span class="tour-date-venue">Ajaccio - U Palatinu</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">10 Sep</span>
+              <span class="tour-date-venue">Marseille - Le Cepac Silo</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">11 Sep</span>
+              <span class="tour-date-venue">Montpellier - Le Corum</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">12 Sep</span>
+              <span class="tour-date-venue">Lyon - Amphithéâtre</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">18 Sep</span>
+              <span class="tour-date-venue">Bordeaux - Le Fémina</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">24 Sep</span>
+              <span class="tour-date-venue">Liège (Belgique) - Le Forum</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">25 Sep</span>
+              <span class="tour-date-venue">Lille - Le Grand Palais</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">26 Sep</span>
+              <span class="tour-date-venue">Strasbourg - Salle Erasme</span>
+            </div>
+            <div class="tour-date">
+              <span class="tour-date-info">04 Oct</span>
+              <span class="tour-date-venue">Paris - Zénith</span>
+            </div>
+          </div>
+          <div class="tour-cta">
+            <a href="https://www.instagram.com/alizeeofficiel/" target="_blank">
+              Plus d'informations →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Discography Section -->
+    <section class="section discography-section" id="discography">
+      <div class="section-header fade-in">
+        <p class="section-label">Discographie Complète</p>
+        <h2 class="section-title">Albums Studio</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Album Tabs -->
+      <div class="album-tabs fade-in">
+        <button class="album-tab active" data-album="1">
+          Gourmandises<span class="album-tab-year">2000</span>
+        </button>
+        <button class="album-tab" data-album="2">
+          Mes Courants Électriques<span class="album-tab-year">2003</span>
+        </button>
+        <button class="album-tab" data-album="3">
+          En Concert<span class="album-tab-year">2004</span>
+        </button>
+        <button class="album-tab" data-album="4">
+          Psychédélices<span class="album-tab-year">2007</span>
+        </button>
+        <button class="album-tab" data-album="5">
+          Une enfant du siècle<span class="album-tab-year">2010</span>
+        </button>
+        <button class="album-tab" data-album="6">
+          5 (Cinq)<span class="album-tab-year">2013</span>
+        </button>
+        <button class="album-tab" data-album="7">
+          Blonde<span class="album-tab-year">2014</span>
+        </button>
+      </div>
+
+      <div class="albums-container">
+        <!-- Album 1: Gourmandises -->
+        <div class="album active" data-album="1">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/64730802/image?size=big"
+              alt="Gourmandises"
+              class="album-cover"
+            />
+            <span class="album-year">2000</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">Gourmandises</h3>
+            <p class="album-credits">
+              Mylène Farmer & Laurent Boutonnat © Requiem Publishing
+            </p>
+            <ol class="tracklist">
+              <li class="track">
+                <span class="track-name featured">Moi... Lolita</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/QpbHdIrtpNo"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                  <a
+                    href="https://youtu.be/uGFU0kizUE0"
+                    target="_blank"
+                    class="track-link"
+                    >Audio</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">Lui ou Toi</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/JkpgnniApas"
+                    target="_blank"
+                    class="track-link"
+                    >Audio</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">L'Alizé</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/gRaRdAYO9II"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                  <a
+                    href="https://youtu.be/6HcYwqaM9Tw"
+                    target="_blank"
+                    class="track-link"
+                    >Audio</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">J.B.G.</span></li>
+              <li class="track"><span class="track-name">Mon Maquis</span></li>
+              <li class="track">
+                <span class="track-name">Parler tout bas</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/QouhRxPE_Po"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">Veni Vedi Vici</span>
+              </li>
+              <li class="track"><span class="track-name">Abracadabra</span></li>
+              <li class="track">
+                <span class="track-name">Gourmandises</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/pvh-ieuM8yg"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">A quoi rêve une jeune fille</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Album 2: Mes Courants Electriques -->
+        <div class="album" data-album="2">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/64716722/image?size=big"
+              alt="Mes Courants Electriques"
+              class="album-cover"
+            />
+            <span class="album-year">2003</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">Mes Courants Électriques...</h3>
+            <p class="album-credits">
+              Mylène Farmer & Laurent Boutonnat © Requiem Publishing
+            </p>
+            <ol class="tracklist">
+              <li class="track">
+                <span class="track-name featured">J'en ai marre !</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/G4LIM9VYhB0"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">A contre-courant</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/H3Ioxh3OTSU"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">Toc de mac</span></li>
+              <li class="track"><span class="track-name">Amélie</span></li>
+              <li class="track">
+                <span class="track-name">C'est trop tard</span>
+              </li>
+              <li class="track"><span class="track-name">Tempête</span></li>
+              <li class="track">
+                <span class="track-name">J'ai pas vingt ans !</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/B8uoyPZhuUw"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">Hey ! Amigo !</span>
+              </li>
+              <li class="track">
+                <span class="track-name">L'e-mail a des ailes</span>
+              </li>
+              <li class="track"><span class="track-name">Youpidou</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Album 3: En Concert (Live) -->
+        <div class="album" data-album="3">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/811036621/image?size=big"
+              alt="En Concert"
+              class="album-cover"
+            />
+            <span class="album-year">2004</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">En Concert</h3>
+            <p class="album-credits">
+              Mylène Farmer & Laurent Boutonnat © Requiem Publishing
+            </p>
+            <ol class="tracklist">
+              <li class="track"><span class="track-name">Intralizée</span></li>
+              <li class="track"><span class="track-name">L'Alizé</span></li>
+              <li class="track">
+                <span class="track-name">Hey ! Amigo !</span>
+              </li>
+              <li class="track"><span class="track-name">Toc de mac</span></li>
+              <li class="track">
+                <span class="track-name featured">J'en ai marre !</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/d8KPZAC4rAc"
+                    target="_blank"
+                    class="track-link"
+                    >Live</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">Lui ou Toi</span></li>
+              <li class="track">
+                <span class="track-name">Gourmandises</span>
+              </li>
+              <li class="track">
+                <span class="track-name">L'e-mail a des ailes</span>
+              </li>
+              <li class="track"><span class="track-name">Mon Maquis</span></li>
+              <li class="track"><span class="track-name">J.B.G.</span></li>
+              <li class="track">
+                <span class="track-name featured">Moi... Lolita</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/sz4xDGUr91A"
+                    target="_blank"
+                    class="track-link"
+                    >Live</a
+                  >
+                </div>
+              </li>
+              <li class="track">
+                <span class="track-name">Amélie m'a dit</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Parler tout bas</span>
+              </li>
+              <li class="track">
+                <span class="track-name">C'est trop tard</span>
+              </li>
+              <li class="track"><span class="track-name">Youpidou</span></li>
+              <li class="track"><span class="track-name">Tempête</span></li>
+              <li class="track">
+                <span class="track-name">A contre-courant</span>
+              </li>
+              <li class="track">
+                <span class="track-name">J'ai pas vingt ans !</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Album 4: Psychédélices -->
+        <div class="album" data-album="4">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/394570577/image?size=big"
+              alt="Psychédélices"
+              class="album-cover"
+            />
+            <span class="album-year">2007</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">Psychédélices</h3>
+            <p class="album-credits">Alizée & Jérémy Chatelain</p>
+            <ol class="tracklist">
+              <li class="track">
+                <span class="track-name featured">Mademoiselle Juliette</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/ak1v9w3qIJg"
+                    target="_blank"
+                    class="track-link"
+                    >Audio</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">Fifty Sixty</span></li>
+              <li class="track">
+                <span class="track-name">Mon Taxi Driver</span>
+              </li>
+              <li class="track"><span class="track-name">Jamais Plus</span></li>
+              <li class="track">
+                <span class="track-name">Psychédélices</span>
+              </li>
+              <li class="track"><span class="track-name">Décollage</span></li>
+              <li class="track">
+                <span class="track-name">Par Les Paupières</span>
+              </li>
+              <li class="track"><span class="track-name">Lilly Town</span></li>
+              <li class="track"><span class="track-name">Lonely List</span></li>
+              <li class="track"><span class="track-name">Idéaliser</span></li>
+              <li class="track"><span class="track-name">L'effet</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Album 5: Une enfant du siècle -->
+        <div class="album" data-album="5">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/393950357/image?size=big"
+              alt="Une enfant du siècle"
+              class="album-cover"
+            />
+            <span class="album-year">2010</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">Une enfant du siècle</h3>
+            <p class="album-credits">Alizée & Various Artists</p>
+            <ol class="tracklist">
+              <li class="track"><span class="track-name">Eden, eden</span></li>
+              <li class="track">
+                <span class="track-name">Grand central</span>
+              </li>
+              <li class="track"><span class="track-name">Limelight</span></li>
+              <li class="track"><span class="track-name">La candida</span></li>
+              <li class="track">
+                <span class="track-name featured"
+                  >Les Collines (Never Leave You)</span
+                >
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/rMJJ4oso7G4"
+                    target="_blank"
+                    class="track-link"
+                    >Audio</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">14 décembre</span></li>
+              <li class="track">
+                <span class="track-name">A cœur fendre</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Factory Girl</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Une fille difficile</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Mes fantômes</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Album 6: 5 -->
+        <div class="album" data-album="6">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/6410170/image?size=big"
+              alt="5"
+              class="album-cover"
+            />
+            <span class="album-year">2013</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">5 (Cinq)</h3>
+            <p class="album-credits">
+              Alexandre Azaria, Thomas Boulard, BB Brunes
+            </p>
+            <ol class="tracklist">
+              <li class="track">
+                <span class="track-name featured">A cause de l'automne</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/XPDEqUnNulg"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">10 ans</span></li>
+              <li class="track">
+                <span class="track-name">Je veux bien</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Mon chevalier</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Le dernier souffle</span>
+              </li>
+              <li class="track"><span class="track-name">Boxing Club</span></li>
+              <li class="track"><span class="track-name">Jeune fille</span></li>
+              <li class="track">
+                <span class="track-name">La guerre en dentelles</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Si tu es un homme</span>
+              </li>
+              <li class="track"><span class="track-name">Happy End</span></li>
+              <li class="track">
+                <span class="track-name">Dans mon sac</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Album 7: Blonde -->
+        <div class="album" data-album="7">
+          <div class="album-cover-container">
+            <img
+              src="https://api.deezer.com/album/7936306/image?size=big"
+              alt="Blonde"
+              class="album-cover"
+            />
+            <span class="album-year">2014</span>
+          </div>
+          <div class="album-info">
+            <h3 class="album-title">Blonde</h3>
+            <p class="album-credits">Pascal Obispo, Zazie, Lionel Florence</p>
+            <ol class="tracklist">
+              <li class="track">
+                <span class="track-name featured">Blonde</span>
+                <div class="track-links">
+                  <a
+                    href="https://youtu.be/cJpVlFMHz1E"
+                    target="_blank"
+                    class="track-link"
+                    >Clip</a
+                  >
+                </div>
+              </li>
+              <li class="track"><span class="track-name">K.-O.</span></li>
+              <li class="track"><span class="track-name">Alcaline</span></li>
+              <li class="track">
+                <span class="track-name">Seulement pour te plaire</span>
+              </li>
+              <li class="track">
+                <span class="track-name">L'amour renfort</span>
+              </li>
+              <li class="track"><span class="track-name">Bi</span></li>
+              <li class="track"><span class="track-name">Mon planeur</span></li>
+              <li class="track">
+                <span class="track-name">Ce qui tue l'amour</span>
+              </li>
+              <li class="track"><span class="track-name">Tweet</span></li>
+              <li class="track">
+                <span class="track-name">Charles est stone</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Mylène Farmer</span>
+              </li>
+              <li class="track">
+                <span class="track-name">Plus de bye-bye</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="section bio-section" id="biography">
+      <div class="section-header fade-in">
+        <p class="section-label">À Propos</p>
+        <h2 class="section-title">Biographie</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="bio-content fade-in">
+        <div class="bio-image-container">
+          <img
+            src="https://alizee-officiel.com/assets/images/alizee-photo.jpg"
+            alt="Alizée"
+            class="bio-image"
+          />
+        </div>
+        <div class="bio-text">
+          <p>
+            Alizée a vu le jour un 21 août au bord de la mer, dans les senteurs
+            du maquis Corse. Originaire d'Ajaccio, elle passe une enfance
+            heureuse sur l'île de beauté. Rapidement, Alizée cherche à exprimer
+            sa fibre artistique.
+          </p>
+
+          <p>
+            Passionnée de danse, elle la pratique depuis l'âge de 4 ans et se
+            familiarise avec l'univers du spectacle qui l'attire, tant aux
+            travers de cours de théâtre que de chant.
+          </p>
+
+          <blockquote class="bio-highlight">
+            « La rencontre entre la jeune corse et le tandem Mylène Farmer -
+            Laurent Boutonnat va bouleverser sa vie. »
+          </blockquote>
+
+          <p>
+            À 11 ans, elle obtient le premier prix d'un concours de dessin en
+            coloriant un avion sur un formulaire. Outre le superbe voyage aux
+            Maldives qu'elle remporte, son dessin est reproduit grandeur nature
+            sur la carlingue d'un avion, qui sera baptisé "Alizée".
+          </p>
+
+          <p>
+            Alizée n'a pas encore 16 ans quand son premier titre "Moi... Lolita"
+            voit le jour. 2 ans plus tard, plus de 4 millions de disques seront
+            vendus à travers le Monde. Ses titres se sont classés en tête des
+            hits parades italiens, espagnols, allemands, anglais, polonais,
+            hollandais, russes... souvent numéro 1 des ventes pendant de
+            nombreuses semaines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collaborations Section -->
+    <section class="section collab-section" id="collaborations">
+      <div class="section-header fade-in">
+        <p class="section-label">Collaborations & Reprises</p>
+        <h2 class="section-title">Collaborations</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="collab-grid fade-in">
+        <a
+          href="https://www.youtube.com/playlist?list=PLa4SNhYXTo6MbkXRJ9XReskqN4FYOmhMk"
+          target="_blank"
+          class="collab-item"
+        >
+          <p class="collab-artist">Unicef Collectif Paris Africa</p>
+          <p class="collab-song">Des ricochets</p>
+        </a>
+        <a
+          href="https://www.youtube.com/playlist?list=PLa4SNhYXTo6MovvKkqH01GYvdJAvo0HUc"
+          target="_blank"
+          class="collab-item"
+        >
+          <p class="collab-artist">Alain Chamfort</p>
+          <p class="collab-song">Clara veut la lune</p>
+        </a>
+        <a
+          href="https://www.youtube.com/playlist?list=PLa4SNhYXTo6Nx3MunbqDmKMBog0wVe4GW"
+          target="_blank"
+          class="collab-item"
+        >
+          <p class="collab-artist">Tal</p>
+          <p class="collab-song">Le Tourbillon</p>
+        </a>
+        <a
+          href="https://www.youtube.com/playlist?list=PLa4SNhYXTo6Mqt3bH6PhD5-rVc52rHj7h"
+          target="_blank"
+          class="collab-item"
+        >
+          <p class="collab-artist">Aldebert</p>
+          <p class="collab-song">Mon petit doigt m'a dit</p>
+        </a>
+        <a
+          href="https://www.youtube.com/playlist?list=PLa4SNhYXTo6OZsTN1rZNCcHnj55lvnvKc"
+          target="_blank"
+          class="collab-item"
+        >
+          <p class="collab-artist">Olly Murs</p>
+          <p class="collab-song">Dear Darlin'</p>
+        </a>
+        <a
+          href="https://www.youtube.com/playlist?list=PLa4SNhYXTo6NkwEXbJ1V6MmBqa4fTzXLi"
+          target="_blank"
+          class="collab-item"
+        >
+          <p class="collab-artist">Disney - Cendrillon</p>
+          <p class="collab-song">Tendre rêve</p>
+        </a>
+        <div class="collab-item">
+          <p class="collab-artist">Tahiti Boy & Palmtree Family</p>
+          <p class="collab-song">It's Christmas</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Charles Aznavour</p>
+          <p class="collab-song">For Me... Formidable</p>
+        </div>
+      </div>
+
+      <div class="section-header fade-in" style="margin-top: 6rem">
+        <h2 class="section-title">Reprises Célèbres</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="collab-grid fade-in">
+        <div class="collab-item">
+          <p class="collab-artist">Madonna</p>
+          <p class="collab-song">La Isla Bonita</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">France Gall</p>
+          <p class="collab-song">Ella, elle l'a</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Serge Gainsbourg</p>
+          <p class="collab-song">La Javanaise</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Édith Piaf</p>
+          <p class="collab-song">La Vie en rose</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Britney Spears</p>
+          <p class="collab-song">Toxic</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">ABBA</p>
+          <p class="collab-song">Waterloo</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Céline Dion & Garou</p>
+          <p class="collab-song">Sous le vent</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Jean-Jacques Goldman</p>
+          <p class="collab-song">Quand la musique est bonne</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Tones and I</p>
+          <p class="collab-song">Dance Monkey</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Vanessa Paradis</p>
+          <p class="collab-song">Il y a</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Irene Cara</p>
+          <p class="collab-song">Fame</p>
+        </div>
+        <div class="collab-item">
+          <p class="collab-artist">Véronique Sanson</p>
+          <p class="collab-song">Ma révérence</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-logo">Alizée</p>
+
+      <p class="footer-section-title">Réseaux sociaux</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/alizeeofficiel/" target="_blank"
+          >Instagram</a
+        >
+        <a href="https://www.youtube.com/c/MoiAlizeeOfficiel" target="_blank"
+          >YouTube</a
+        >
+      </div>
+
+      <p class="footer-section-title">Écouter la musique</p>
+      <div class="social-links">
+        <a
+          href="https://open.spotify.com/artist/53deL58uye6fCqRK4COtR4"
+          target="_blank"
+          >Spotify</a
+        >
+        <a href="https://music.apple.com/artist/alizée/13129725" target="_blank"
+          >Apple Music</a
+        >
+        <a href="https://www.deezer.com/artist/6714" target="_blank">Deezer</a>
+        <a href="https://www.qobuz.com/interpreter/alizee/69770" target="_blank"
+          >Qobuz</a
+        >
+        <a href="https://web.napster.com/artist/alizee" target="_blank"
+          >Napster</a
+        >
+        <a href="https://play.anghami.com/artist/1589629" target="_blank"
+          >Anghami</a
+        >
+        <a href="https://soundcloud.com/alizee-official" target="_blank"
+          >SoundCloud</a
+        >
+        <a
+          href="https://music.amazon.com/artists/B000QJPB2K/alizée"
+          target="_blank"
+          >Amazon Music</a
+        >
+        <a
+          href="https://music.youtube.com/channel/UCHIv0QHRLwTqWTPYoh_5ppQ"
+          target="_blank"
+          >YouTube Music</a
+        >
+      </div>
+
+      <p class="footer-section-title">Discographie</p>
+      <div class="social-links">
+        <a href="https://www.discogs.com/artist/30422-Alizée" target="_blank"
+          >Discogs</a
+        >
+      </div>
+
+      <p class="footer-text">
+        © 2026 Alizée - Fan Site (Gift). Tous droits réservés. | Design:
+        <a href="https://t.me/alexxxm" target="_blank">Mazunin Andrew</a>
+      </p>
+    </footer>
+
+    <script>
+      // Navbar scroll effect
+      const navbar = document.getElementById("navbar");
+      let lastScroll = 0;
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 100) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+
+        lastScroll = currentScroll;
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Fade in on scroll
+      const fadeElements = document.querySelectorAll(".fade-in");
+
+      const fadeInObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        }
+      );
+
+      fadeElements.forEach((el) => fadeInObserver.observe(el));
+
+      // Smooth fade for hero content on scroll
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const heroContent = document.querySelector(".hero-content");
+        if (heroContent && scrolled < window.innerHeight) {
+          const opacity = 1 - scrolled / (window.innerHeight * 0.6);
+          heroContent.style.opacity = Math.max(0, opacity);
+        }
+      });
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+      const navLinks = document.querySelector(".nav-links");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        navLinks.style.display =
+          navLinks.style.display === "flex" ? "none" : "flex";
+        navLinks.style.position = "absolute";
+        navLinks.style.top = "100%";
+        navLinks.style.left = "0";
+        navLinks.style.right = "0";
+        navLinks.style.flexDirection = "column";
+        navLinks.style.background = "rgba(10, 10, 18, 0.98)";
+        navLinks.style.padding = "2rem";
+        navLinks.style.gap = "1.5rem";
+      });
+
+      // Album tabs switching
+      const albumTabs = document.querySelectorAll(".album-tab");
+      const albums = document.querySelectorAll(".album");
+
+      albumTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const albumId = tab.getAttribute("data-album");
+
+          // Remove active class from all tabs and albums
+          albumTabs.forEach((t) => t.classList.remove("active"));
+          albums.forEach((a) => a.classList.remove("active"));
+
+          // Add active class to clicked tab and corresponding album
+          tab.classList.add("active");
+          document
+            .querySelector(`.album[data-album="${albumId}"]`)
+            .classList.add("active");
+        });
+      });
+
+      // Easter egg - Konami code for "Moi... Lolita"
+      let konamiCode = [];
+      const secretCode = [
+        "ArrowUp",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowLeft",
+        "ArrowRight",
+        "b",
+        "a",
+      ];
+
+      document.addEventListener("keydown", (e) => {
+        konamiCode.push(e.key);
+        konamiCode = konamiCode.slice(-10);
+
+        if (konamiCode.join(",") === secretCode.join(",")) {
+          window.open("https://youtu.be/QpbHdIrtpNo", "_blank");
+        }
+      });
+    </script>
+  </body>
+</html>
